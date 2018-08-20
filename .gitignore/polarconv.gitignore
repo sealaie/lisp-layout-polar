@@ -1,0 +1,34 @@
+(defun polarconv (stp endp)
+; get the 2D cartesian coordinates of 2 points
+; return in the coordinates of the second point in polar coordinates
+; first load the function by (load "polarconv")
+; example (polarconv (list 0 0)  (list -1 -1))
+; retuns (1.41421 3.92699)
+
+(if (= (- (car endp) (car stp)) 0)
+    (progn
+     (if (> (- (car (cdr endp)) (car (cdr stp))) 0)
+	(setq kappa (* pi 0.5))
+     )
+
+     (if (< (- (car (cdr endp)) (car (cdr stp))) 0)
+	(setq kappa (* pi 1.5))
+     )     
+))
+
+
+(if (not (= (- (car endp) (car stp)) 0))
+    (progn
+             (setq tangrel (/ (- (car (cdr endp)) (car (cdr stp))) (- (car endp) (car stp)) ) )
+ 
+(setq kappa (atan tangrel))
+
+(if (< (- (car endp) (car stp)) 0)  (setq kappa (+ kappa (/ pi 1))))
+
+))
+
+
+(setq distan (sqrt (+ (* (- (car (cdr endp)) (car (cdr stp))) (- (car (cdr endp)) (car (cdr stp))) ) (* (- (car endp) (car stp)) (- (car endp) (car stp))))))
+(list distan kappa)
+
+)
